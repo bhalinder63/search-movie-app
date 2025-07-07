@@ -3,12 +3,14 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Search from "./components/Search";
 import MovieCard from "./components/MovieCard";
+import { useDebounce } from "react-use";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+  const [debouncedSearchTerm, setdebouncedSearchTerm] = useState("");
 
   const VITE_TMDB_API_KEY =
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzBhOGJhODcxYjBmMjBiZTM0MGJhMzU1MTVkZGM2YyIsIm5iZiI6MTc1MDA1NDk4My45NjIsInN1YiI6IjY4NGZiODQ3MjBjNjRjZGE2ZWIwZTg2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4-7TFMlugzrcgv8BqheGdqqr5jGDwMAL1sUsv9-KCvA";
@@ -22,6 +24,14 @@ const App = () => {
       Authorization: `Bearer ${API_KEY}`,
     },
   };
+
+  useDebounce(
+    () => {
+      setdebouncedSearchTerm(searchTerm);
+    },
+    500,
+    [searchTerm]
+  );
 
   const fetchMovies = async (query = "") => {
     setisLoading(true);
@@ -48,8 +58,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchMovies(searchTerm);
-  }, [searchTerm]);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
   return (
     <main>
