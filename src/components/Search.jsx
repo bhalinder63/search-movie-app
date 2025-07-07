@@ -4,7 +4,7 @@ const Search = (props) => {
   return (
     <div className="search">
       <div>
-        <img src="/search.svg" alt="Search" />
+        <img src="search.svg" alt="Search" />
         <input
           type="text"
           placeholder="Search for a movie"

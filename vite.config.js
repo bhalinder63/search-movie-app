@@ -5,4 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: "/search-movie-app/",
+  define: {
+    global: "globalThis",
+  },
+  build: {
+    rollupOptions: {
+      external: [],
+    },
+  },
 });
