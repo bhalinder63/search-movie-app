@@ -12,11 +12,10 @@ const App = () => {
   const [isLoading, setisLoading] = useState(false);
   const [debouncedSearchTerm, setdebouncedSearchTerm] = useState("");
 
-  const VITE_TMDB_API_KEY =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzBhOGJhODcxYjBmMjBiZTM0MGJhMzU1MTVkZGM2YyIsIm5iZiI6MTc1MDA1NDk4My45NjIsInN1YiI6IjY4NGZiODQ3MjBjNjRjZGE2ZWIwZTg2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4-7TFMlugzrcgv8BqheGdqqr5jGDwMAL1sUsv9-KCvA";
-
   const API_BASE_URL = "https://api.themoviedb.org/3";
-  const API_KEY = VITE_TMDB_API_KEY;
+
+  const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
   const API_OPTIONS = {
     method: "GET",
     headers: {
